@@ -1,0 +1,18 @@
+
+@use '@angular/material' as mat;
+
+@include mat.core();
+@include mat.strong-focus-indicators();
+
+$hufflepluf-primary: mat.define-palette(mat.$amber-palette, 500);
+$hufflepluf-accent: mat.define-palette(mat.$brown-palette, A200, A100, A400);
+
+$hufflepluf-theme: mat.define-light-theme((
+ color: (
+   primary: $hufflepluf-primary,
+   accent: $hufflepluf-accent,
+ )
+));
+
+@include mat.all-component-themes($hufflepluf-theme);
+@include mat.strong-focus-indicators-theme($hufflepluf-theme);

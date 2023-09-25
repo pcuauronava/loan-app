@@ -1,0 +1,9 @@
+<div>
+    <div class="form-entry font-white">Interest Paid:</div>
+    <br /><br /><br />
+    <div class="form-entry font-white">
+        {{ "$" + (interest | number : "1.2-2") }}
+        <!-- 1.2-2 means it will use a minimum of one number behind the decimal up to 2 -->
+    </div>
+    <br /><br /><br />
+</div>
