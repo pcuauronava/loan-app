@@ -20,7 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-import { TemplateComponent } from './template/template.component';
+// import { TemplateComponent } from './template/template.component';
 import { InterestComponent } from './interest/interest.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PaymentComponent } from './payment/payment.component';
@@ -31,7 +31,7 @@ import { PaymentComponent } from './payment/payment.component';
     LoanCalculatorComponent,
     AboutComponent,
     ContactComponent,
-    TemplateComponent,
+    // TemplateComponent,
     InterestComponent,
     NotFoundComponent,
     PaymentComponent

@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./interest.component.scss'],
 })
 export class InterestComponent implements OnInit {
-  @Input() interest: number;
+  @Input() interest: number | undefined;
   constructor() {}
 
   ngOnInit(): void {}

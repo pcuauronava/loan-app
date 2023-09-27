@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoanCalculatorService } from '../loan-calculator.service';
+// import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { LoanCalculatorService } from '../loan-calculator.service';
 
 @Component({
   selector: 'app-loan-calculator',
@@ -8,41 +9,59 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./loan-calculator.component.scss']
 })
 export class LoanCalculatorComponent implements OnInit {
-  // loanData = loanData;
-  loanData: FormGroup;
+  log(x: any){
+    console.log(x);
+  }
+  loanData: FormGroup = new FormGroup({});
   // setting the form group
+  interestResult: number = 0;
   payment: number = 0;
   interest: number = 0;
-  // years: number = 0;
+  // numberOfPayments: number = 0;
   // reset the values to 0
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    console.log(this.loanData);
+  }
   ngOnInit(): void {
     this.loanData = this.fb.group({
-      amount: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$'),]),],
+      principal: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$'),]),],
       interest: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$'),])],
-      years: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$'),],),],
+      numberOfPayments: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$'),],),],
     });
   }
 
 get form() {
   return this.loanData.controls;
 }
+onSubmit() {
+  const formValues = this.loanData.value;
+  //this is how we capture the values of the form
+  const principal = parseInt(formValues.principal);
+  const interest = parseInt(formValues.interest);
+  const numberOfPayments = parseInt(formValues.numberOfPayments);
 
-  calculateResults() {
+    }
+ 
+
+calculateResults() {
+  if (this.loanData) {
     let formValues = this.loanData.value;
-    let amount = parseFloat(formValues.amount);
+    let principal = parseFloat(formValues.principal);
     let interest = parseFloat(formValues.interest);
-    let years = parseFloat(formValues.years);
+    let numberOfPayments = parseFloat(formValues.numberOfPayments);
 
-    let months = (years * 12);
+    let months = (numberOfPayments * 12);
     let ratePerPeriod = (interest / 100) / 12;
 
-    this.payment = (amount * ratePerPeriod) / (1 - Math.pow(1 + ratePerPeriod, -months));
-    this.interest = (this.payment * months) - amount;
+    this.payment = (principal * ratePerPeriod) / (1 - Math.pow(1 + ratePerPeriod, -months));
+    this.interestResult = (this.payment * months) - principal;
   }
-  clearForm() {
-    this.payment = 0;
-    this.interest = 0;
+}
+clearForm() {
+  this.payment = 0;
+  this.interest = 0;
+  if (this.loanData) {
     this.loanData.reset();
   }
+}
 }
