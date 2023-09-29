@@ -3,7 +3,8 @@
         <div class="loan-form" fxFlex>
             <mat-card class="mat-elevation-z8" style="width: 540px;">
                 <mat-card-title>Loan Terms
-                    <div *ngIf="loanData.controls['principal'].errors && loanData.controls['principal'].touched">
+                    <div class="diag-alert"
+                        *ngIf="loanData.controls['principal'].errors && loanData.controls['principal'].touched">
                         <p>Principal is required</p>
                     </div>
                     <!-- this section is to show errors if the conditions are met -->
@@ -13,51 +14,43 @@
 
                         <mat-form-field fxFlex style="width: 500px;">
                             <!-- appearance="fill" -->
-                            <mat-label>Principal</mat-label>
+                            <mat-label>Loan Amount Ex: 531.22</mat-label>
                             <input type="text" name="principal" required id="principal" matInput
                                 formControlName="principal" />
                         </mat-form-field>
                         <mat-form-field fxFlex style="width: 500px;">
-                            <mat-label>Interest Rate</mat-label>
+                            <mat-label>Ex: 4.5</mat-label>
                             <input type="text" name="interest" required id="interest" matInput
                                 formControlName="interest" />
                         </mat-form-field>
                         <mat-form-field fxFlex style="width: 500px;">
-                            <mat-label>Number of Payments</mat-label>
+                            <mat-label>Years:</mat-label>
                             <input type="text" name="numberOfPayments" required id="numberOfPayments" matInput
                                 formControlName="numberOfPayments" />
                         </mat-form-field>
 
                     </form>
                 </mat-card-content>
-                <button type="submit" mat-raised-button color="primary" style="width: 500px;"
-                    (click)="calculateResults()">Calculate the
+                <button disabled="form.control['loanData'].!valid" type="submit" mat-raised-button color="primary"
+                    style="width: 500px;" (click)="calculateResults()">Calculate the
                     payments</button>
             </mat-card>
         </div>
         <div fxLayout="row">
             <div class="loan-form" fxFlex>
                 <mat-card class="mat-elevation-z0" style="width: 540px;">
-                    <mat-card-title>Total Loan Amount</mat-card-title>
+                    <mat-card-title>Monthly payments</mat-card-title>
                     <mat-card-content>
-                        <h1 style="font-size: x-large; text-align: center;">{{ payment }}</h1>
+                        <h1 style="font-size: x-large; text-align: center;">{{ payment | number:'1.1-2' }}</h1>
                     </mat-card-content>
                 </mat-card>
                 <mat-card class="mat-elevation-z0" style="width: 500px;">
-                    <mat-card-title>Monthly payments</mat-card-title>
+                    <mat-card-title>Total Loan Amount</mat-card-title>
                     <mat-card-content>
-                        <h1 style="font-size: x-large; text-align: center;">{{ interestResult }}</h1>
+                        <h1 style="font-size: x-large; text-align: center;">{{ interestResult | number: '1.1-2' }}</h1>
                     </mat-card-content>
                 </mat-card>
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- A = P (r (1 + r)^n) / ((1 + r)^n – 1)
-A = Payment Amount per Period
-P = Initial Principal (loan amount)
-r = Interest Rate per Period
-n = Total Number of Payments or Periods, in months
--->

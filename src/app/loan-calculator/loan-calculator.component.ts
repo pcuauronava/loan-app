@@ -53,8 +53,11 @@ calculateResults() {
     let months = (numberOfPayments * 12);
     let ratePerPeriod = (interest / 100) / 12;
 
-    this.payment = (principal * ratePerPeriod) / (1 - Math.pow(1 + ratePerPeriod, -months));
+    this.payment = (principal * (ratePerPeriod * Math.pow(ratePerPeriod + 1, months))) / (Math.pow((1 + ratePerPeriod),months) -1);
     this.interestResult = (this.payment * months) - principal;
+
+    // (amount * (ratePerPeriod * Math.pow((ratePerPeriod + 1), months))) /
+    //   (Math.pow((1 + ratePerPeriod), months) - 1);
   }
 }
 clearForm() {
@@ -65,3 +68,8 @@ clearForm() {
   }
 }
 }
+// A = P (r (1 + r)^n) / ((1 + r)^n – 1)
+// A = Payment Amount per Period
+// P = Initial Principal (loan amount)
+// r = Interest Rate per Period
+// n = Total Number of Payments or Periods, in months
