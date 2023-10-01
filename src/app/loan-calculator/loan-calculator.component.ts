@@ -1,7 +1,12 @@
+/**
+ * Title: loan-calculator.component.ts
+ * Author: Richard Krasso
+ * Modified by: Patrick Cuauro
+ * Date: 09/20/2023
+ * Description: loan calculator code component
+ */
 import { Component, OnInit } from '@angular/core';
-// import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoanCalculatorService } from '../loan-calculator.service';
 
 @Component({
   selector: 'app-loan-calculator',
@@ -25,7 +30,8 @@ export class LoanCalculatorComponent implements OnInit {
   ngOnInit(): void {
     this.loanData = this.fb.group({
       principal: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$'),]),],
-      interest: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$'),])],
+      interest: ['', Validators.compose([Validators.required, Validators.pattern('[0-9]*\\.?[0-9]*$'),])],
+      //allow decimal numbers, needs to be fixed
       numberOfPayments: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]*$'),],),],
     });
   }
@@ -62,6 +68,7 @@ calculateResults() {
 }
 clearForm() {
   this.payment = 0;
+  this.interestResult = 0;
   this.interest = 0;
   if (this.loanData) {
     this.loanData.reset();

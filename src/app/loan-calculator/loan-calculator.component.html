@@ -1,56 +1,77 @@
-<div fxLayout="column" fxLayoutGap="20px">
-    <div fxLayout="row">
+<!--
+  Title: loan-calculator.component.html
+  Author: Richard Krasso
+  Modified By: Patrick Cuauro
+  Date: 10/01/2023
+  Description: HTML for the loan calculator component
+-->
+<div fxLayout="row" fxLayoutGap="20px">
+    <div fxLayout="column">
         <div class="loan-form" fxFlex>
-            <mat-card class="mat-elevation-z8" style="width: 540px;">
-                <mat-card-title>Loan Terms
+            <mat-card class="mat-elevation-z8 background-brown" color="accent">
+                <mat-card-title style="font-size: x-large; padding: 15px; margin: auto auto;">Loan Terms
+                </mat-card-title>
+                <mat-card-subtitle style="font-size: small; padding: 15px; margin: auto auto;">Enter the loan
+                    amount, interest rate, and term of the loan.
                     <div class="diag-alert"
                         *ngIf="loanData.controls['principal'].errors && loanData.controls['principal'].touched">
-                        <p>Principal is required</p>
+                        <p>Principal is required!</p>
                     </div>
-                    <!-- this section is to show errors if the conditions are met -->
-                </mat-card-title>
+                    <div class="diag-alert"
+                        *ngIf="loanData.controls['interest'].errors && loanData.controls['interest'].touched">
+                        <p>Interest rate is required!</p>
+                    </div>
+                    <div class="diag-alert"
+                        *ngIf="loanData.controls['numberOfPayments'].errors && loanData.controls['numberOfPayments'].touched">
+                        <p>Years are required!</p>
+                    </div>
+                </mat-card-subtitle>
                 <mat-card-content>
                     <form fxLayout="column" fxLayoutGap="16px" [formGroup]="loanData">
-
-                        <mat-form-field fxFlex style="width: 500px;">
-                            <!-- appearance="fill" -->
-                            <mat-label>Loan Amount Ex: 531.22</mat-label>
-                            <input type="text" name="principal" required id="principal" matInput
+                        <mat-form-field fxFlex appearance="fill">
+                            <mat-label>Loan Amount Ex: $531.22</mat-label>
+                            <span matSuffix>$&nbsp;</span>
+                            <input label="amount" type="text" name="principal" required id="principal" matInput
                                 formControlName="principal" />
                         </mat-form-field>
-                        <mat-form-field fxFlex style="width: 500px;">
-                            <mat-label>Ex: 4.5</mat-label>
+                        <mat-form-field fxFlex appearance="fill">
+                            <mat-label>Ex: 4.5%</mat-label>
+                            <span matSuffix>%&nbsp;</span>
                             <input type="text" name="interest" required id="interest" matInput
                                 formControlName="interest" />
                         </mat-form-field>
-                        <mat-form-field fxFlex style="width: 500px;">
+                        <mat-form-field fxFlex appearance="fill">
                             <mat-label>Years:</mat-label>
                             <input type="text" name="numberOfPayments" required id="numberOfPayments" matInput
                                 formControlName="numberOfPayments" />
                         </mat-form-field>
-
                     </form>
                 </mat-card-content>
-                <button disabled="form.control['loanData'].!valid" type="submit" mat-raised-button color="primary"
-                    style="width: 500px;" (click)="calculateResults()">Calculate the
+                <button [disabled]="!loanData.valid" type="submit" mat-raised-button color="primary" appearance="fill"
+                    (click)="calculateResults()">Calculate the
                     payments</button>
             </mat-card>
         </div>
-        <div fxLayout="row">
-            <div class="loan-form" fxFlex>
-                <mat-card class="mat-elevation-z0" style="width: 540px;">
-                    <mat-card-title>Monthly payments</mat-card-title>
-                    <mat-card-content>
-                        <h1 style="font-size: x-large; text-align: center;">{{ payment | number:'1.1-2' }}</h1>
-                    </mat-card-content>
-                </mat-card>
-                <mat-card class="mat-elevation-z0" style="width: 500px;">
-                    <mat-card-title>Total Loan Amount</mat-card-title>
-                    <mat-card-content>
-                        <h1 style="font-size: x-large; text-align: center;">{{ interestResult | number: '1.1-2' }}</h1>
-                    </mat-card-content>
-                </mat-card>
-            </div>
+    </div>
+    <div fxLayout="column">
+        <div class="loan-form" fxFlex>
+            <mat-card class="mat-elevation-z8 background-brown" color="accent">
+                <mat-card-title style="text-align: center;">Monthly payments</mat-card-title>
+                <mat-card-content>
+                    <h1 style="font-size: x-large; text-align: center;">${{ payment | number:'1.1-2' }}</h1>
+                </mat-card-content>
+
+            </mat-card>
+            <mat-card class="mat-elevation-z8 background-brown">
+
+                <mat-card-title style="text-align: center;">Total Loan Amount</mat-card-title>
+                <mat-card-content>
+                    <h1 style="font-size: x-large; text-align: center;">${{ interestResult | number: '1.1-2' }}</h1>
+                </mat-card-content>
+                <button type="submit" mat-button color="warm" appearance="fill" (click)="clearForm()">Clear the
+                    form</button>
+                <br><br>
+            </mat-card>
         </div>
     </div>
 </div>

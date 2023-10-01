@@ -1,4 +1,14 @@
 .diag-alert {
-//   color: red;
-  background-color: red($color: #000000);
+  color: red;
+}
+.mat-card-content {
+  margin: 10px;
+  background-color: brown;
+}
+.background-brown {
+  background-color: rgb(186, 152, 0);
+}
+.background-brown-dark {
+  background-color:rgb(115, 94, 0);
+  color: white;
 }
