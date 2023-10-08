@@ -13,18 +13,9 @@
                 </mat-card-title>
                 <mat-card-subtitle style="font-size: small; padding: 15px; margin: auto auto;">Enter the loan
                     amount, interest rate, and term of the loan.
-                    <div class="diag-alert"
-                        *ngIf="loanData.controls['principal'].errors && loanData.controls['principal'].touched">
-                        <p>Principal is required!</p>
-                    </div>
-                    <div class="diag-alert"
-                        *ngIf="loanData.controls['interest'].errors && loanData.controls['interest'].touched">
-                        <p>Interest rate is required!</p>
-                    </div>
-                    <div class="diag-alert"
-                        *ngIf="loanData.controls['numberOfPayments'].errors && loanData.controls['numberOfPayments'].touched">
-                        <p>Years are required!</p>
-                    </div>
+
+
+
                 </mat-card-subtitle>
                 <mat-card-content>
                     <form fxLayout="column" fxLayoutGap="16px" [formGroup]="loanData">
@@ -33,18 +24,33 @@
                             <span matSuffix>$&nbsp;</span>
                             <input label="amount" type="text" name="principal" required id="principal" matInput
                                 formControlName="principal" />
+
                         </mat-form-field>
+                        <mat-error class="diag-alert"
+                            *ngIf="loanData.controls['principal'].errors && loanData.controls['principal'].touched">
+                            <p>Principal is required!</p>
+                        </mat-error>
                         <mat-form-field fxFlex appearance="fill">
                             <mat-label>Ex: 4.5%</mat-label>
                             <span matSuffix>%&nbsp;</span>
                             <input type="text" name="interest" required id="interest" matInput
                                 formControlName="interest" />
+
                         </mat-form-field>
+                        <mat-error class="diag-alert"
+                            *ngIf="loanData.controls['interest'].errors && loanData.controls['interest'].touched">
+                            <p>Interest rate is required!</p>
+                        </mat-error>
                         <mat-form-field fxFlex appearance="fill">
                             <mat-label>Years:</mat-label>
                             <input type="text" name="numberOfPayments" required id="numberOfPayments" matInput
                                 formControlName="numberOfPayments" />
+
                         </mat-form-field>
+                        <mat-error class="diag-alert"
+                            *ngIf="loanData.controls['numberOfPayments'].errors && loanData.controls['numberOfPayments'].touched">
+                            <p>Years are required!</p>
+                        </mat-error>
                     </form>
                 </mat-card-content>
                 <button [disabled]="!loanData.valid" type="submit" mat-raised-button color="primary" appearance="fill"
@@ -53,20 +59,21 @@
             </mat-card>
         </div>
     </div>
-    <div fxLayout="column">
+    <div fxLayout="column" appearance="fill">
         <div class="loan-form" fxFlex>
             <mat-card class="mat-elevation-z8 background-brown" color="accent">
-                <mat-card-title style="text-align: center;">Monthly payments</mat-card-title>
+                <mat-card-title style="font-size: 48px; text-align: center;">Monthly payments</mat-card-title>
                 <mat-card-content>
-                    <h1 style="font-size: x-large; text-align: center;">${{ payment | number:'1.1-2' }}</h1>
+                    <h1 style="font-size: 60px; color: white; text-align: center;">${{ payment | number:'1.1-2' }}</h1>
                 </mat-card-content>
 
             </mat-card>
             <mat-card class="mat-elevation-z8 background-brown">
 
-                <mat-card-title style="text-align: center;">Total Loan Amount</mat-card-title>
+                <mat-card-title style="font-size: 48px; text-align: center;">Total Loan Amount</mat-card-title>
                 <mat-card-content>
-                    <h1 style="font-size: x-large; text-align: center;">${{ interestResult | number: '1.1-2' }}</h1>
+                    <h1 style="font-size: 60px; color: white; text-align: center;">${{ interestResult | number: '1.1-2'
+                        }}</h1>
                 </mat-card-content>
                 <button type="submit" mat-button color="warm" appearance="fill" (click)="clearForm()">Clear the
                     form</button>
