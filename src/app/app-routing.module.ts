@@ -12,6 +12,7 @@ import { LoanCalculatorComponent } from './loan-calculator/loan-calculator.compo
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 const routes: Routes = [
   { path: '',
@@ -24,9 +25,12 @@ const routes: Routes = [
   { path: 'contact',
     component: ContactComponent
   },
+  { path: 'bar-chart',
+  component: BarChartComponent},
   { path: '**',
     component: NotFoundComponent
   }
+  //this last path has to be the last path in the array
 ];
 
 @NgModule({

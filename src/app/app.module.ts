@@ -1,3 +1,4 @@
+import { Chart } from 'chart.js';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -24,6 +25,9 @@ import { ContactComponent } from './contact/contact.component';
 import { InterestComponent } from './interest/interest.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PaymentComponent } from './payment/payment.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,9 @@ import { PaymentComponent } from './payment/payment.component';
     // TemplateComponent,
     InterestComponent,
     NotFoundComponent,
-    PaymentComponent
+    PaymentComponent,
+    BarChartComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +55,8 @@ import { PaymentComponent } from './payment/payment.component';
     MatListModule,
     MatSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
